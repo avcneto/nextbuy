@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:7.0.5
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      - "MONGO_INITDB_DATABASE=items"
+      - "MONGO_INITDB_ROOT_USERNAME=fiap"
+      - "MONGO_INITDB_ROOT_PASSWORD=fiap"
+    ports:
+      - "27777:27017"
+    volumes:
+      - mongodb:/data/db
+
+volumes:
+  mongodb:
+    driver: local

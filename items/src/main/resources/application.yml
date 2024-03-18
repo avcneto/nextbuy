@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: items
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27777
+      database: ${MONGO_INITDB_ROOT_DATABASE}
+      username: ${DATASOURCE_USERNAME}
+      password: ${DATASOURCE_PASSWORD}
+      authentication-database: admin
+
+server:
+  servlet:
+    context-path: /api
+  port: 8083
+  error:
+    include-stacktrace: on_param
+    include-message: always
+    include-binding-errors: always
+  netty:
+    connection-timeout: 60000
+
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          r2dbc: INFO

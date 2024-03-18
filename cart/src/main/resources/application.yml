@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: cart
+  datasource:
+    url: jdbc:postgresql://localhost:5433/payments
+    username: ${DATASOURCE_USER}
+    password: ${DATASOURCE_PASSWORD}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    sql:
+      init:
+        mode: always
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    deserialization:
+      fail-on-unknown-properties: false
+
+
+server:
+  servlet:
+    context-path: /api
+  port: 8082
+  error:
+    include-stacktrace: on_param
+    include-message: always
