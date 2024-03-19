@@ -1,0 +1,50 @@
+<-- CARRINHO -->
+
+{
+	"id": 0,
+	"total": 0.0,
+	"item": [
+		{"id": 0, "name": "Sabonete", "price": 0.0},
+		{"id": 0, "name": "Gel", "price": 0.0}
+	],
+	"userId": 0
+	"status": "aberto" // aberto/concluido
+}
+
+
+<-- ESTOQUE -->
+
+Adicionar qunt estoque dentro MS Item
+
+
+<-- PASSO A PASSO -->
+
+1. Registrar usuário
+	POST USER
+2. Logar com usuário CLIENTE
+	POST USER (JWT)
+3. Buscar todos os itens & estoque
+	GET ALL ITEMS
+	{"id": 0, "name": "Sabonete", "price": 0.0, "estoque": 10}
+4. Inserir item no carrinho c/ quantidade
+	POST CARRINHO
+5. Verifica o total (R$)
+	GET CARRINHO
+6. Finaliza o carrinho
+	POST PGTO
+7. Define método de pgto
+	PUT PGTO
+8. Encerra e o Vlad faz um pix
+	POST PGTO
+	PUT ITEM (estoque)
+
+---------------------------------------------------------------------
+
+1. Registrar usuário
+	POST USER
+2. Logar com usuário ADMIN
+	POST USER (JWT)
+3. Cadastrar item com estoque
+	POST ITEM
+4. Cadastrar método de pgto
+	POST PGTO
