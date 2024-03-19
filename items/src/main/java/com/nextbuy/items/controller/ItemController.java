@@ -46,13 +46,13 @@ public record ItemController(
     }
 
     @DeleteMapping( params = ID)
-    public ResponseEntity<Void> deleteItem(Long id) {
+    public ResponseEntity<Void> deleteItem(String id) {
         itemService.deleteItem(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping(params = ID)
-    public ResponseEntity<Item> updateItemById(Long id , @RequestBody UpdateItemDTO updateItemDTO) {
+    public ResponseEntity<Item> updateItemById(String id , @RequestBody UpdateItemDTO updateItemDTO) {
         var item = itemService.updateItemById(id, updateItemDTO);
         return ResponseEntity.ok(item);
     }

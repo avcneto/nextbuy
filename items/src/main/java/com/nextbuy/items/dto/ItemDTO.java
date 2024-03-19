@@ -16,7 +16,7 @@ public record ItemDTO(
     BigDecimal price
 ) {
     private static final String NOT_EMPTY_OR_BLANK_MESSAGE = "The field cannot be empty or blank";
-    private static final String PRICE_REQUIRED_MESSAGE = "The field cannot be empty or blank";
+    private static final String PRICE_REQUIRED_MESSAGE = "The field cannot be empty or blank and must follow the pattern %d.%d";
     private static final String PRICE_REGEX = "^\\d{1,3}(\\.\\d{3})*(,\\d{2})?$";
 
     public void validPrice() {

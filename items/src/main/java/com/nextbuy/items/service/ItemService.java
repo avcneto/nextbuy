@@ -72,11 +72,11 @@ public class ItemService {
         return new Pagination<>(itemPagination);
     }
 
-    public void deleteItem(Long id) {
+    public void deleteItem(String id) {
         itemRepository.deleteById(id);
     }
 
-    public Item updateItemById(Long id, UpdateItemDTO updateItemDTO) {
+    public Item updateItemById(String id, UpdateItemDTO updateItemDTO) {
         var item = itemRepository.findById(id).orElseThrow(() -> new NotFoundException(ITEM_NOT_FOUND));
         updateItemByUpdateItemDTO(updateItemDTO, item);
         return itemRepository.save(item);

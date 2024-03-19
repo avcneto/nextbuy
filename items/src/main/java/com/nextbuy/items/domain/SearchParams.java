@@ -17,7 +17,7 @@ public class SearchParams {
     private final static Integer DEFAULT_OFFSET = 0;
     private final static boolean ALL = false;
 
-    private Long id;
+    private String id;
     private String name;
     private Integer limit = DEFAULT_LIMIT;
     private Integer offset = DEFAULT_OFFSET;

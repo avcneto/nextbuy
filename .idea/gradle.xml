@@ -1,53 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/cart" />
-<<<<<<< HEAD
-=======
-        <option name="gradleJvm" value="semeru-17" />
->>>>>>> b6dc25dc9fd0574aab2db2384257e1cfc8e6a737
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/cart" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/items" />
-<<<<<<< HEAD
-=======
-        <option name="gradleJvm" value="semeru-17" />
->>>>>>> b6dc25dc9fd0574aab2db2384257e1cfc8e6a737
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/items" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/payments" />
-<<<<<<< HEAD
-=======
-        <option name="gradleJvm" value="semeru-17" />
->>>>>>> b6dc25dc9fd0574aab2db2384257e1cfc8e6a737
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/payments" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/user" />
-<<<<<<< HEAD
-=======
-        <option name="gradleJvm" value="semeru-17" />
->>>>>>> b6dc25dc9fd0574aab2db2384257e1cfc8e6a737
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/user" />
           </set>
         </option>
       </GradleProjectSettings>

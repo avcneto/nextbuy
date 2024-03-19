@@ -31,7 +31,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Sabonete\",\r\n    \"price\": 10.99\r\n}",
+					"raw": "{\r\n    \"name\": \"Saboneteira\",\r\n    \"price\": 10.99\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -76,7 +76,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{local}}/api/item?id=1&name=Sabonete&limit=10&offset=0",
+					"raw": "{{local}}/api/item?id=b88ba05b-0e58-4336-a411-4acdbe551134&name=Saboneteira&limit=10&offset=0",
 					"host": [
 						"{{local}}"
 					],
@@ -87,11 +87,11 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "b88ba05b-0e58-4336-a411-4acdbe551134"
 						},
 						{
 							"key": "name",
-							"value": "Sabonete"
+							"value": "Saboneteira"
 						},
 						{
 							"key": "limit",
@@ -112,7 +112,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{local}}/api/item?id=1",
+					"raw": "{{local}}/api/item?id=32123dae-fea8-4e3f-9fc3-7044dce62d61",
 					"host": [
 						"{{local}}"
 					],
@@ -123,7 +123,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "32123dae-fea8-4e3f-9fc3-7044dce62d61"
 						}
 					]
 				}
@@ -145,7 +145,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{local}}/api/item?id=1",
+					"raw": "{{local}}/api/item?id=b88ba05b-0e58-4336-a411-4acdbe551134",
 					"host": [
 						"{{local}}"
 					],
@@ -156,7 +156,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "b88ba05b-0e58-4336-a411-4acdbe551134"
 						}
 					]
 				}
