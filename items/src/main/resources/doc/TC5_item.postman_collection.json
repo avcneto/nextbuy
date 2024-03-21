@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "8b47699c-28a3-4ac1-88fe-c4a0446f9141",
+		"name": "TC5_item",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15043957"
+	},
+	"item": [
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/api/ping",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Saboneteira\",\r\n    \"price\": 10.99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/item",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/api/item/all",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"item",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get item by param",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/api/item?id=b88ba05b-0e58-4336-a411-4acdbe551134&name=Saboneteira&limit=10&offset=0",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"item"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "b88ba05b-0e58-4336-a411-4acdbe551134"
+						},
+						{
+							"key": "name",
+							"value": "Saboneteira"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/api/item?id=32123dae-fea8-4e3f-9fc3-7044dce62d61",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"item"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "32123dae-fea8-4e3f-9fc3-7044dce62d61"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update item",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Sabonetinho\",\r\n    \"price\": 9.99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/api/item?id=b88ba05b-0e58-4336-a411-4acdbe551134",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"api",
+						"item"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "b88ba05b-0e58-4336-a411-4acdbe551134"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "http://localhost:8083"
+		}
+	]
+}
