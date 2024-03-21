@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "938281c7-d89b-4d48-b0cb-7a93d1c8c41c",
+		"name": "nex-buy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29499384"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/api/ping",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"1234@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/auth",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\" : \"15091657894\",\r\n    \"name\" : \"Lila\",\r\n    \"birthday\" : \"2000-01-28\",\r\n    \"gender\" : \"FEMALE\",\r\n    \"email\" :\"1234@gmail.com\",\r\n    \"password\" : \"123456\",\r\n    \"address\": \"adress test\",\r\n    \"address_number\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/user?id=1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user by cpf",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/user?cpf=15091657894",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "15091657894"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/user/all?limit=10&offset=0",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"all"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/user?id=11",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\" : \"15091657894\",\r\n    \"name\" : \"Lila Mendes 3\",\r\n    \"birthday\" : \"2000-10-29\",\r\n    \"gender\" : \"MALE\",\r\n    \"address\": \"update address test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/user?id=11",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

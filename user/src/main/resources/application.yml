@@ -31,3 +31,8 @@ server:
     include-stacktrace: on_param
     include-message: always
     include-binding-errors: always
+
+jwt:
+  token:
+    key: ${JTW_TOKEN_KEY}
+    expiration: ${JWT_TOKEN_EXPIRATION}
