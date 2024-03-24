@@ -7,8 +7,10 @@ import com.nextbuy.user.exception.NotFoundException;
 import com.nextbuy.user.exception.ResourceAlreadyExistsException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -68,6 +70,16 @@ public record HandlerException(
   @ExceptionHandler(ForbiddenException.class)
   public ResponseEntity<ProblemDetail> handleForbiddenException(ForbiddenException ex) {
     return ResponseEntity.status(FORBIDDEN).body(ex.getBody());
+  }
+
+  @ResponseStatus(BAD_REQUEST)
+  @ExceptionHandler(HttpMessageNotReadableException.class)
+  public ResponseEntity<ProblemDetail> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+    ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST.value());
+    problemDetail.setDetail("Invalid JSON input");
+    problemDetail.setTitle("Invalid JSON input");
+    problemDetail.setDetail(ex.getMessage());
+    return ResponseEntity.status(BAD_REQUEST).body(problemDetail);
   }
 
 }

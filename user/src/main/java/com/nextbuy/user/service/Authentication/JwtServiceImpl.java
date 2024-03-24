@@ -6,11 +6,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Function;
 
 @Service
@@ -23,6 +25,7 @@ public class JwtServiceImpl implements JwtService {
   private String jwtTokenExpiration;
 
   private static final String USER_APP = "USER APP";
+  private static final String ROLE = "role";
 
   @Override
   public String extractUserName(String token) {
@@ -48,10 +51,15 @@ public class JwtServiceImpl implements JwtService {
   private String generateJwtToken(UserDetails userDetails) {
     Date today = new Date();
     Date expiration = new Date(today.getTime() + Long.parseLong(jwtTokenExpiration));
+    List<String> roles = userDetails.getAuthorities()
+            .stream()
+            .map(GrantedAuthority::getAuthority)
+            .toList();
 
     return Jwts.builder()
             .issuer(USER_APP)
             .subject(userDetails.getUsername())
+            .claim(ROLE, roles)
             .issuedAt(today)
             .expiration(expiration)
             .signWith(getSigningKey())

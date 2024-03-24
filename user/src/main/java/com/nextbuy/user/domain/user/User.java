@@ -26,7 +26,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 
@@ -65,7 +64,7 @@ public class User implements UserDetails {
 
   @JsonIgnore
   @Enumerated(EnumType.STRING)
-  private Role role = Role.ADMIN;
+  private Role role = Role.USER;
 
   @CreationTimestamp
   private LocalDateTime dateCreated;
@@ -82,6 +81,7 @@ public class User implements UserDetails {
     this.password = userDTO.password();
     this.address = userDTO.address();
     this.addressNumber = userDTO.addressNumber();
+    this.role = userDTO.role() == null ? Role.USER : userDTO.role();
   }
 
   public void update(UserUpdateDTO dto) {

@@ -28,3 +28,6 @@ logging:
       springframework:
         data:
           r2dbc: INFO
+
+jwt:
+  secret: ${JTW_TOKEN_KEY}

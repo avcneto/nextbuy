@@ -1,6 +1,7 @@
 package com.nextbuy.user.dto.user;
 
 import com.nextbuy.user.domain.user.Gender;
+import com.nextbuy.user.domain.user.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -33,6 +34,7 @@ public record UserDTO(
         @NotNull(message = FIELD_CANNOT_BE_NULL_EMPTY_BLANK_MESSAGE)
         Gender gender,
 
+        Role role,
 
         @Email(message = EMAIL_MESSAGE)
         @NotBlank(message = FIELD_CANNOT_BE_NULL_EMPTY_BLANK_MESSAGE)
