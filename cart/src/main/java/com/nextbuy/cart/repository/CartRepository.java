@@ -10,5 +10,8 @@ import java.util.Optional;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
-  Optional<Cart> findByUserIdAndStatus(Long userId, Status status);
+
+  boolean existsByUserIdAndStatus(Long userId, Status status);
+
+  Optional<Cart> findByUserIdAndStatus(Long id, Status status);
 }

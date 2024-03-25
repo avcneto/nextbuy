@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static java.util.Collections.emptyList;
@@ -31,12 +32,17 @@ public class Cart {
   private Long id;
   private Long userId;
   @ElementCollection
-  private List<Items> itemsIds = emptyList();
+  private List<Item> itemsIds = emptyList();
   @Enumerated(EnumType.STRING)
   private Status status = Status.PENDING;
+  private BigDecimal total;
 
   public Cart(CartDTO cartDTO) {
     this.userId = cartDTO.userId();
     this.itemsIds = cartDTO.itemsIds().isEmpty() ? emptyList() : cartDTO.itemsIds();
+  }
+
+  public void setItemsIds(List<Item> itemsIds) {
+    this.itemsIds.addAll(itemsIds);
   }
 }
