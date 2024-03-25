@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Embeddable
-public class Items {
+public class Item {
   private static final String FIELD_CANNOT_BE_NULL = "Field cannot be null";
   private static final String FIELD_CANNOT_BE_BLANK = "Field cannot be blank";
 
