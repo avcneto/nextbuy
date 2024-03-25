@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/cart.main.iml" filepath="$PROJECT_DIR$/.idea/modules/cart.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/items.main.iml" filepath="$PROJECT_DIR$/.idea/modules/items.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/nextbuy.iml" filepath="$PROJECT_DIR$/.idea/nextbuy.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/payments.main.iml" filepath="$PROJECT_DIR$/.idea/modules/payments.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user.main.iml" />
     </modules>
   </component>
