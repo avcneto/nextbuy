@@ -19,9 +19,11 @@ public class Item {
     private String id = UUID.randomUUID().toString();
     private String name;
     private BigDecimal price;
+    private Integer quantity = 0;
 
     public Item(ItemDTO itemDTO){
         this.name = itemDTO.name();
         this.price = itemDTO.price();
+        this.quantity = itemDTO.quantity();
     }
 }

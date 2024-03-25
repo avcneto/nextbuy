@@ -37,6 +37,7 @@ public class WebSecurityFilterConfig extends OncePerRequestFilter {
 
   private static final Integer TOKEN_INDEX = 7;
   private static final List<Router> ROUTER_REQUIRED = List.of(
+          new Router(ITEM_PATH, HttpMethod.POST),
           new Router(ITEM_PATH, HttpMethod.PUT),
           new Router(ITEM_PATH, HttpMethod.DELETE),
           new Router(ITEM_PATH, HttpMethod.PATCH)

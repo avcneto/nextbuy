@@ -1,17 +1,22 @@
 package com.nextbuy.cart.domain;
 
 import com.nextbuy.cart.dto.CartDTO;
-import com.nextbuy.cart.dto.ItemDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 @Entity
 @Getter
@@ -21,20 +26,17 @@ import java.util.List;
 @Table(name = "cart")
 public class Cart {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // ID DO CARRINHO
-    private List<ItemDTO> = new ArrayList; // Lista de Itens
-    private long itemId; // ID DO ITEM
-    private long userId; // ID DO USUÁRIO
-    private Integer itemQuantity; // QNT DO ITEM
-    private BigDecimal total; // TOTAL DO CARRINHO
-    private String paymentMethod; // MÉTODO PGTO
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+  private Long userId;
+  @ElementCollection
+  private List<Items> itemsIds = emptyList();
+  @Enumerated(EnumType.STRING)
+  private Status status = Status.PENDING;
 
-    public Cart(CartDTO cartDTO) {
-        this.itemId = itemId;
-        this.itemQuantity = itemQuantity;
-        this.total = total;
-        this.paymentMethod = paymentMethod;
-    }
+  public Cart(CartDTO cartDTO) {
+    this.userId = cartDTO.userId();
+    this.itemsIds = cartDTO.itemsIds().isEmpty() ? emptyList() : cartDTO.itemsIds();
+  }
 }

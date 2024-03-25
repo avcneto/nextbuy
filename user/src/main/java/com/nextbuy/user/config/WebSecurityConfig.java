@@ -57,7 +57,8 @@ public class WebSecurityConfig {
                                 "/ping",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/user/**"
+                                "/user/**",
+                                "/user"
                         ).permitAll()
                         .requestMatchers(POST,
                                 "/auth",

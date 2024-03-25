@@ -36,8 +36,8 @@ public class UserService {
     return repository.save(new User(userDTO));
   }
 
-  public User getUserByCpf(String cpf) {
-    return findUserByCpf(cpf);
+  public User getUserByCpfOrId(String cpf, Long id) {
+    return findUserByCpfOrId(cpf, id);
   }
 
   public Pagination<User> getAllUser(Integer limit, Integer offset) {
@@ -64,13 +64,13 @@ public class UserService {
     return repository.findById(id).orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
   }
 
-  public User findUserByCpf(String cpf) {
-    return findByCpf(cpf).orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
+  public User findUserByCpfOrId(String cpf, Long id) {
+    return findByCpfOrId(cpf, id).orElseThrow(() -> new NotFoundException(USER_NOT_FOUND));
   }
 
-  private Optional<User> findByCpf(String cpf) {
+  private Optional<User> findByCpfOrId(String cpf, Long id) {
     try {
-      return repository.findByCpf(cpf);
+      return repository.findByCpfOrId(cpf, id);
     } catch (Exception ex) {
       log.error(FAILED_DEPENDENCY_DATABASE, ex);
       throw new FailedDependencyException(FAILED_DEPENDENCY_DATABASE, ex);

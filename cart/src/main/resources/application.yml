@@ -2,8 +2,8 @@ spring:
   application:
     name: cart
   datasource:
-    url: jdbc:postgresql://localhost:5433/payments
-    username: ${DATASOURCE_USER}
+    url: jdbc:postgresql://localhost:5433/cart
+    username: ${DATASOURCE_USERNAME}
     password: ${DATASOURCE_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect

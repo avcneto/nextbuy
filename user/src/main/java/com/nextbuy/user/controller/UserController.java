@@ -41,9 +41,9 @@ public record UserController(
             .body(user);
   }
 
-  @GetMapping(headers = X_API_VERSION_1, params = {CPF})
-  public ResponseEntity<User> getUserByCpf(String cpf) {
-    return ResponseEntity.ok(service.getUserByCpf(cpf));
+  @GetMapping(headers = X_API_VERSION_1)
+  public ResponseEntity<User> getUserByCpfOrId(@RequestParam(required = false) String cpf, @RequestParam(required = false) Long id) {
+    return ResponseEntity.ok(service.getUserByCpfOrId(cpf, id));
   }
 
   @GetMapping(headers = X_API_VERSION_1, path = ALL)

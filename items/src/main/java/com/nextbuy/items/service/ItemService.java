@@ -67,7 +67,7 @@ public class ItemService {
             return new Pagination<>(itemRepository.findAll(pageRequest));
         }
 
-        var itemPagination = itemRepository.findByIdOrName(searchParams.getId(), searchParams.getName(), pageRequest);
+        var itemPagination = itemRepository.findByIdInOrName(searchParams.getIds(), searchParams.getName(), pageRequest);
 
         return new Pagination<>(itemPagination);
     }

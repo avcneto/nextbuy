@@ -1,11 +1,17 @@
 package com.nextbuy.cart.dto;
 
-import java.math.BigDecimal;
+import com.nextbuy.cart.domain.Items;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
-public record CartDTO (
-        Long itemId,
-        Integer itemQuantity,
-        BigDecimal total,
-        String paymentMethod
-){
+import java.util.List;
+
+public record CartDTO(
+        @NotNull(message = FIELD_CANNOT_BE_NULL)
+        Long userId,
+        @Valid
+        List<Items> itemsIds
+) {
+  private static final String FIELD_CANNOT_BE_NULL = "Field cannot be null";
+
 }

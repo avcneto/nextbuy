@@ -41,7 +41,7 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=fiap
-      - POSTGRES_DB=payments
+      - POSTGRES_DB=cart
       - POSTGRES_PASSWORD=fiap
     ports:
       - "5433:5432"

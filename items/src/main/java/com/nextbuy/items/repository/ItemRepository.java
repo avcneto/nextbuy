@@ -6,10 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends MongoRepository<Item, String> {
     Optional<Item> findByName(String name);
-    Page<Item> findByIdOrName(String id, String name, Pageable pageable);
+    Page<Item> findByIdInOrName(List<String> id, String name, Pageable pageable);
 }
