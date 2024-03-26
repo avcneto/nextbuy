@@ -16,6 +16,6 @@ public class CardService {
     }
 
     public Card getCardByIdUser(Long idUser) {
-        return repository.findById(idUser).orElseThrow(() -> new RuntimeException("Card not found"));
+        return repository.findByIdUser(idUser).orElseThrow(() -> new RuntimeException("Card not found"));
     }
 }

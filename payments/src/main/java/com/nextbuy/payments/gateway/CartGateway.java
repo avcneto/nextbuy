@@ -1,9 +1,11 @@
 package com.nextbuy.payments.gateway;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nextbuy.payments.config.HttpClientConfig;
-import com.nextbuy.payments.controller.dto.CartDTO;
+import com.nextbuy.payments.domain.Cart;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
@@ -29,23 +31,33 @@ public record CartGateway(
     private static final Duration TIME_OUT = ofSeconds(10);
     private static final String FAIL_DEPENDENCY_ITEMS_MESSAGE = "error to get data from items";
 
-    public Optional<CartDTO> getCart(Long idCart) {
+    public Optional<Cart> getCart(Long idCart) throws JsonProcessingException {
         if (idCart == null) {
             throw new RuntimeException("Id cart can't be null");
         }
 
         var uri = URI.create(format(URL, idCart));
-        var response = sendRequest(uri);
+        var response = sendRequest(uri, HttpMethod.GET);
 
-        return Optional.ofNullable(new ObjectMapper().convertValue(response.body(), CartDTO.class));
+
+        return Optional.ofNullable(new ObjectMapper().readValue(response.body(), Cart.class));
     }
 
-    private HttpResponse<String> sendRequest(URI uri) {
+    public void patchCart(Long idCart) {
+        if (idCart == null) {
+            throw new RuntimeException("Id cart can't be null");
+        }
+
+        var uri = URI.create(format(URL, idCart));
+        sendRequest(uri, HttpMethod.PATCH);
+    }
+
+    private HttpResponse<String> sendRequest(URI uri, HttpMethod httpMethod) {
         try {
             return httpClientConfig
                     .getHttpClient()
                     .build()
-                    .sendAsync(getHttpRequest(uri), ofString())
+                    .sendAsync(httpMethod == HttpMethod.GET ? getHttpRequest(uri) : patchHttpRequest(uri), ofString())
                     .join();
         } catch (Exception ex) {
             log.error(FAIL_DEPENDENCY_ITEMS_MESSAGE, ex);
@@ -58,6 +70,15 @@ public record CartGateway(
                 .uri(uri)
                 .timeout(TIME_OUT)
                 .header(ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .build();
+    }
+
+    private HttpRequest patchHttpRequest(URI uri) {
+        return HttpRequest.newBuilder()
+                .uri(uri)
+                .timeout(TIME_OUT)
+                .header(ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .method("PATCH", HttpRequest.BodyPublishers.noBody())
                 .build();
     }
 }
