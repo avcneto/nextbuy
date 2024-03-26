@@ -179,15 +179,7 @@ Payments: [http://localhost:8081/swagger-ui/index.html#/](http://localhost:8081/
 Items: [http://localhost:8083/swagger-ui/index.html#/](http://localhost:8083/swagger-ui/index.html#/)  
 Cart: [http://localhost:8082/api/swagger-ui/index.html#/](http://localhost:8082/api/swagger-ui/index.html#/)
 
-Postman Collection:  
-[User Collection](nextbuy/user/src/main/resources/doc/user.postman_collection)  
-[Payments Collection]("ToDo")  
-[Items Collection](nextbuy/items/src/main/resources/doc/TC5_item.postman_collection.json)  
-[Cart Collection]("ToDo")
 
 Postman Documentation:  
-[User Documentation](TBD)  
-[Payments Documentation]()  
-[Items Documentation](TBD)  
-[Cart Documentation](TBD)
+[Items Collection](/nextbuy/doc/nex-buy.postman_collection.json)
 
