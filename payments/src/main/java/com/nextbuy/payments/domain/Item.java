@@ -1,25 +1,16 @@
 package com.nextbuy.payments.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.data.annotation.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Item {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    private String name;
-
-    private BigDecimal price;
-
-    private Integer quantity = 0;
+    private Integer quantity;
 
 }
