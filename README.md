@@ -1,8 +1,5 @@
 ## nextBuy
 
-
-swagger: http://localhost:8080/api/swagger-ui/index.html
-
 ![](https://imgur.com/38i1Shu.png)
 ![Licença](https://img.shields.io/badge/license-MIT-green)
 ![Badge em Desenvolvimento](https://img.shields.io/badge/release%20date-mar/24-yellow)
