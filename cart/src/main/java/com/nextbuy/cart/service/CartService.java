@@ -27,6 +27,7 @@ public class CartService {
   private static final String INVALID_ITEM = "invalid item";
   private static final String THERE_IS_ALREADY_PENDING_CART = "There is already a pending cart";
   private static final String THERE_IS_NO_PENDING_CART = "There is no pending cart to add item";
+  private static final String CART_NOT_FOUND = "cart not found";
 
   CartRepository cartRepository;
   UserGateway userGateway;
@@ -113,4 +114,10 @@ public class CartService {
     return cartRepository.existsByUserIdAndStatus(userId, Status.PENDING);
   }
 
+  public Cart checkout(Long id) {
+    var cart = cartRepository.findById(id).orElseThrow(() -> new BadRequestException(CART_NOT_FOUND));
+    cart.setStatus(Status.FINISHED);
+
+    return cartRepository.save(cart);
+  }
 }
