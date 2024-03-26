@@ -6,6 +6,7 @@ import com.nextbuy.cart.domain.Status;
 import com.nextbuy.cart.dto.AddItemDTO;
 import com.nextbuy.cart.dto.CartDTO;
 import com.nextbuy.cart.dto.ItemDTO;
+import com.nextbuy.cart.dto.ItemPaginationDTO;
 import com.nextbuy.cart.exception.BadRequestException;
 import com.nextbuy.cart.exception.NotFoundException;
 import com.nextbuy.cart.gateway.ItemGateway;
@@ -16,6 +17,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class CartService {
   private static final String THERE_IS_ALREADY_PENDING_CART = "There is already a pending cart";
   private static final String THERE_IS_NO_PENDING_CART = "There is no pending cart to add item";
   private static final String CART_NOT_FOUND = "cart not found";
+  private static final String ITEM_NOT_FOUND = "Item not found";
 
   CartRepository cartRepository;
   UserGateway userGateway;
@@ -52,7 +55,13 @@ public class CartService {
 
   public Cart createCart(CartDTO cartDTO) {
     validateUser(cartDTO);
-    validateItem(cartDTO);
+    var items = itemGateway.getItems(cartDTO.itemsIds()
+            .stream()
+            .map(Item::getId)
+            .toList()
+    );
+
+    validateItem(cartDTO, items);
 
     var existingCart = isExistingCart(cartDTO.userId());
 
@@ -60,7 +69,12 @@ public class CartService {
       throw new BadRequestException(THERE_IS_ALREADY_PENDING_CART);
     }
 
-    return cartRepository.save(new Cart(cartDTO));
+    var newCart = new Cart(cartDTO);
+    newCart.setTotal(items.results().stream()
+            .map(ItemDTO::price)
+            .reduce(BigDecimal.ZERO, BigDecimal::add));
+
+    return cartRepository.save(newCart);
   }
 
   @Transactional
@@ -70,16 +84,29 @@ public class CartService {
     }
 
     var cart = cartRepository.findByUserIdAndStatus(addItemDTO.userId(), Status.PENDING);
+    var total = itemGateway.getItems(List.of(addItemDTO.id()))
+            .results()
+            .stream()
+            .findFirst()
+            .map(ItemDTO::price)
+            .orElseThrow(() -> new NotFoundException(ITEM_NOT_FOUND));
+
     cart.setItemsIds(List.of(new Item(addItemDTO.id(), addItemDTO.quantity())));
+    cart.setTotal(cart.getTotal().add(total));
 
     return cartRepository.save(cart);
   }
 
   public void removeItemFromCart(Long cartId, String itemId) {
     var cart = cartRepository.findById(cartId);
+    var itemPrice = itemGateway.getItems(List.of(itemId))
+            .results().stream()
+            .map(ItemDTO::price)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
 
     cart.ifPresent(it -> {
       it.getItemsIds().removeIf(item -> item.getId().equals(itemId));
+      it.setTotal(it.getTotal().subtract(itemPrice));
       cartRepository.save(it);
     });
 
@@ -93,13 +120,7 @@ public class CartService {
     }
   }
 
-  private void validateItem(CartDTO cartDTO) {
-    var items = itemGateway.getItems(cartDTO.itemsIds()
-            .stream()
-            .map(Item::getId)
-            .toList()
-    );
-
+  private void validateItem(CartDTO cartDTO, ItemPaginationDTO items) {
     List<String> itemIdsFromCartDTO = cartDTO.itemsIds().stream().map(Item::getId).toList();
     List<String> itemIdsFromResults = items.results().stream().map(ItemDTO::id).toList();
 
