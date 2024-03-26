@@ -2,6 +2,7 @@ package com.nextbuy.cart.controller;
 
 import com.nextbuy.cart.domain.Cart;
 import com.nextbuy.cart.domain.Item;
+import com.nextbuy.cart.dto.AddItemDTO;
 import com.nextbuy.cart.dto.CartDTO;
 import com.nextbuy.cart.service.CartService;
 import jakarta.validation.Valid;
@@ -37,15 +38,15 @@ public record CartController(
   }
 
   @PostMapping("/add")
-  public ResponseEntity<Item> addItemToCart(@RequestParam Long userId, @RequestParam Long itemId) {
-    var cart = cartService.addItemToCart(userId);
+  public ResponseEntity<Cart> addItemToCart(@RequestBody AddItemDTO addItemDTO) {
+    var cart = cartService.addItemToCart(addItemDTO);
     return ResponseEntity.ok(cart);
   }
 
   @DeleteMapping
-  public ResponseEntity<Void> removeItemFromCart(@RequestParam Long userId, @RequestParam Long itemId) {
-    cartService.removeItemFromCart(userId, itemId);
-    return ResponseEntity.noContent().build();
+  public ResponseEntity<Void> removeItemFromCart(@RequestParam Long cartId, @RequestParam String itemId) {
+    cartService.removeItemFromCart(cartId, itemId);
+    return ResponseEntity.ok().build();
   }
 
     @GetMapping(params = ID)

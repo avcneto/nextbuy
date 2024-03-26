@@ -3,6 +3,7 @@ package com.nextbuy.cart.service;
 import com.nextbuy.cart.domain.Cart;
 import com.nextbuy.cart.domain.Item;
 import com.nextbuy.cart.domain.Status;
+import com.nextbuy.cart.dto.AddItemDTO;
 import com.nextbuy.cart.dto.CartDTO;
 import com.nextbuy.cart.dto.ItemDTO;
 import com.nextbuy.cart.exception.BadRequestException;
@@ -61,23 +62,25 @@ public class CartService {
     return cartRepository.save(new Cart(cartDTO));
   }
 
-  private boolean isExistingCart(Long userId) {
-    return cartRepository.existsByUserIdAndStatus(userId, Status.PENDING);
-  }
-
   @Transactional
-  public Item addItemToCart(Long userId ) {
-    if(!isExistingCart(userId)) {
-        throw new BadRequestException(THERE_IS_NO_PENDING_CART);
+  public Cart addItemToCart(AddItemDTO addItemDTO) {
+    if (!isExistingCart(addItemDTO.userId())) {
+      throw new BadRequestException(THERE_IS_NO_PENDING_CART);
     }
 
-    var cart = cartRepository.findByUserIdAndStatus(userId, Status.PENDING);
+    var cart = cartRepository.findByUserIdAndStatus(addItemDTO.userId(), Status.PENDING);
+    cart.setItemsIds(List.of(new Item(addItemDTO.id(), addItemDTO.quantity())));
 
-
-    return new Item();
+    return cartRepository.save(cart);
   }
 
-  public void removeItemFromCart(Long userId, Long itemId) {
+  public void removeItemFromCart(Long cartId, String itemId) {
+    var cart = cartRepository.findById(cartId);
+
+    cart.ifPresent(it -> {
+      it.getItemsIds().removeIf(item -> item.getId().equals(itemId));
+      cartRepository.save(it);
+    });
 
   }
 
@@ -106,13 +109,8 @@ public class CartService {
     }
   }
 
-  public void updateCart(CartDTO cartDTO) {
-    // INSERIR / REMOVER ITEM DO CARRINHO
+  private boolean isExistingCart(Long userId) {
+    return cartRepository.existsByUserIdAndStatus(userId, Status.PENDING);
   }
-
-  public void clearCart(CartDTO cartDTO) {
-    // LIMPA CARRINHO
-  }
-
 
 }
