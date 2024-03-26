@@ -3,9 +3,9 @@ package com.nextbuy.payments.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nextbuy.payments.controller.dto.CardDTO;
+import com.nextbuy.payments.controller.dto.RegisterPaymentDTO;
 import com.nextbuy.payments.domain.Card;
 import com.nextbuy.payments.domain.Payment;
-import com.nextbuy.payments.domain.TypePayment;
 import com.nextbuy.payments.service.CardService;
 import com.nextbuy.payments.service.CartService;
 import com.nextbuy.payments.service.PaymentService;
@@ -35,14 +35,14 @@ public class PaymentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cardService.registerCard(objectMapper.convertValue(dto, Card.class)));
     }
 
-    @PostMapping("/{idCart}/{typePayment}")
-    public ResponseEntity<Payment> registerPayment(@PathVariable Long idCart, @PathVariable TypePayment typePayment) throws JsonProcessingException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.registerPayment(idCart, typePayment));
+    @PostMapping("/register")
+    public ResponseEntity<Payment> registerPayment(@Valid @RequestBody RegisterPaymentDTO dto) throws JsonProcessingException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.registerPayment(dto));
     }
 
-    @PatchMapping("/{idCart}/confirm")
-    public ResponseEntity<Void> confirm(@PathVariable Long idCart) throws JsonProcessingException {
-        cartService.finishCart(idCart);
+    @PatchMapping("/confirm")
+    public ResponseEntity<Void> confirm(@Valid @RequestBody CartIdDTO dto) throws JsonProcessingException {
+        cartService.finishCart(dto.idCart());
         return ResponseEntity.ok().build();
     }
 }

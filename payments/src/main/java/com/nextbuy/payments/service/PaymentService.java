@@ -1,6 +1,7 @@
 package com.nextbuy.payments.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.nextbuy.payments.controller.dto.RegisterPaymentDTO;
 import com.nextbuy.payments.domain.Payment;
 import com.nextbuy.payments.domain.Pix;
 import com.nextbuy.payments.domain.TypePayment;
@@ -21,18 +22,14 @@ public class PaymentService {
     private PaymentRepository repository;
 
 
-    public Payment registerPayment(Long idCart, TypePayment typePayment) throws JsonProcessingException {
-        if (typePayment == null) {
-            throw new RuntimeException("Type Payment undefiened");
-        }
-
-        var cart = cartService.getCartById(idCart);
+    public Payment registerPayment(RegisterPaymentDTO dto) throws JsonProcessingException {
+        var cart = cartService.getCartById(dto.idCart());
         var payment = new Payment();
 
         payment.setIdCarrinho(cart.getId());
         payment.setTotalValue(cart.getTotal());
 
-        if (TypePayment.PIX.equals(typePayment)) {
+        if (TypePayment.PIX.equals(dto.typePayment())) {
             payment.setPix(new Pix());
         } else {
             payment.setCard(cardService.getCardByIdUser(cart.getUserId()));

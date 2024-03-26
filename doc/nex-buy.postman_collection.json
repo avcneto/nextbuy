@@ -1,0 +1,705 @@
+{
+	"info": {
+		"_postman_id": "cf7f1fa2-55e4-4089-9b84-51615435770d",
+		"name": "nex-buy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25315740"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/api/ping",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"1234@gmail.com\",\r\n    \"password\" : \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/auth",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\" : \"15091657894\",\r\n    \"name\" : \"Lila\",\r\n    \"birthday\" : \"2000-01-28\",\r\n    \"gender\" : \"FEMALE\",\r\n    \"email\" :\"1234@gmail.com\",\r\n    \"password\" : \"123456\",\r\n    \"role\": \"ADMIN\",\r\n    \"address\": \"adress test\",\r\n    \"address_number\": 1\r\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/user?id=1",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user by cpf",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/user?cpf=15091657894",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "15091657894"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all user",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/user/all?limit=10&offset=0",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"all"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{local}}/api/user?id=11",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-API-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\" : \"15091657894\",\r\n    \"name\" : \"Lila Mendes 3\",\r\n    \"birthday\" : \"2000-10-29\",\r\n    \"gender\" : \"MALE\",\r\n    \"address\": \"update address test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/api/user?id=11",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "item",
+			"item": [
+				{
+					"name": "ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local-3}}/api/ping",
+							"host": [
+								"{{local-3}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Saboneteira2\",\r\n    \"price\": 10.99,\r\n    \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-3}}/api/item",
+							"host": [
+								"{{local-3}}"
+							],
+							"path": [
+								"api",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local-3}}/api/item/all",
+							"host": [
+								"{{local-3}}"
+							],
+							"path": [
+								"api",
+								"item",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get item by param",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local-3}}/api/item?id=b88ba05b-0e58-4336-a411-4acdbe551134&name=Saboneteira&limit=10&offset=0",
+							"host": [
+								"{{local-3}}"
+							],
+							"path": [
+								"api",
+								"item"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "b88ba05b-0e58-4336-a411-4acdbe551134"
+								},
+								{
+									"key": "name",
+									"value": "Saboneteira"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local-3}}/api/item?id=4c1dc8d7-f864-4434-b718-3edb5fd2843d",
+							"host": [
+								"{{local-3}}"
+							],
+							"path": [
+								"api",
+								"item"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4c1dc8d7-f864-4434-b718-3edb5fd2843d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Sabonetinho\",\r\n    \"price\": 9.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-3}}/api/item?id=b88ba05b-0e58-4336-a411-4acdbe551134",
+							"host": [
+								"{{local-3}}"
+							],
+							"path": [
+								"api",
+								"item"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "b88ba05b-0e58-4336-a411-4acdbe551134"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local-2}}/api/ping",
+							"host": [
+								"{{local-2}}"
+							],
+							"path": [
+								"api",
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create or update cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 11,\r\n    \"items_ids\": [\r\n        {\r\n            \"id\": \"f5ee3e00-ac76-4ab8-8992-91f4d0842619\",\r\n            \"quantity\": 2\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-2}}/api/cart",
+							"host": [
+								"{{local-2}}"
+							],
+							"path": [
+								"api",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local-2}}/api/cart?id=1",
+							"host": [
+								"{{local-2}}"
+							],
+							"path": [
+								"api",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add item by id cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "JSESSIONID=6B561254808C649544C7C1D97F095122"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 11,\n    \"id\": \"466fdf8a-4c8a-4692-8f0d-0438fd2648b3\",\n    \"quantity\": 2\n}"
+						},
+						"url": {
+							"raw": "localhost:8082/api/cart/add",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Cookie",
+								"value": "JSESSIONID=6B561254808C649544C7C1D97F095122"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 11,\n    \"id\": \"b61b1317-2bad-4d84-a1c5-fc10c631c850\",\n    \"quantity\": 5\n}"
+						},
+						"url": {
+							"raw": "localhost:8082/api/cart?cartId=1&itemId=f5ee3e00-ac76-4ab8-8992-91f4d0842619",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"api",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "cartId",
+									"value": "1"
+								},
+								{
+									"key": "itemId",
+									"value": "f5ee3e00-ac76-4ab8-8992-91f4d0842619"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payments",
+			"item": [
+				{
+					"name": "register card",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_user\" : 11,\r\n    \"name_on_card\" : \"Lucas\",\r\n    \"number_card\" : 12346532,\r\n    \"cvc\" : 123,\r\n    \"due_date\" : \"2024-05-19T15:00:00Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-1}}/api/payments/card",
+							"host": [
+								"{{local-1}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"card"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "make payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_cart\": 1,\r\n    \"type_payment\": \"PIX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-1}}/api/payments/register",
+							"host": [
+								"{{local-1}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Finish cart",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_cart\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local-1}}/api/payments/confirm",
+							"host": [
+								"{{local-1}}"
+							],
+							"path": [
+								"api",
+								"payments",
+								"confirm"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
